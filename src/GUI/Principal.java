@@ -5,9 +5,12 @@
  */
 package GUI;
 
+import GUI.placaFotovotaica.EscolhaPlaca;
+import GUI.sistemaOffGrid.AdicionarEquipamentos;
+
 /**
  *
- * @author piton
+ * @author Marlon
  */
 public class Principal extends javax.swing.JFrame {
 
@@ -29,53 +32,47 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        serie = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        paralelo = new javax.swing.JButton();
-        misto = new javax.swing.JButton();
+        placa = new javax.swing.JButton();
+        offGrid = new javax.swing.JButton();
+        onGrid = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("FOTODIM");
         setResizable(false);
 
-        jPanel1.setBackground(java.awt.Color.white);
-
-        jLabel1.setFont(new java.awt.Font("Ume Gothic C5", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(2, 130, 65));
-        jLabel1.setText("CALCULO");
-
-        serie.setBackground(new java.awt.Color(1, 127, 66));
-        serie.setFont(new java.awt.Font("Phetsarath OT", 0, 24)); // NOI18N
-        serie.setForeground(new java.awt.Color(254, 254, 254));
-        serie.setText("SÉRIE");
-        serie.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                serieActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Ume Gothic C5", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("FOTODIM");
 
-        paralelo.setBackground(new java.awt.Color(1, 127, 66));
-        paralelo.setFont(new java.awt.Font("Phetsarath OT", 0, 24)); // NOI18N
-        paralelo.setForeground(new java.awt.Color(254, 254, 254));
-        paralelo.setText("PARALELO");
-        paralelo.addActionListener(new java.awt.event.ActionListener() {
+        placa.setBackground(new java.awt.Color(1, 127, 66));
+        placa.setFont(new java.awt.Font("Phetsarath OT", 0, 24)); // NOI18N
+        placa.setForeground(new java.awt.Color(254, 254, 254));
+        placa.setText("Placa fotovotaíca");
+        placa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paraleloActionPerformed(evt);
+                placaActionPerformed(evt);
             }
         });
 
-        misto.setBackground(new java.awt.Color(1, 127, 66));
-        misto.setFont(new java.awt.Font("Phetsarath OT", 0, 24)); // NOI18N
-        misto.setForeground(new java.awt.Color(254, 254, 254));
-        misto.setText("MISTO");
-        misto.addActionListener(new java.awt.event.ActionListener() {
+        offGrid.setBackground(new java.awt.Color(1, 127, 66));
+        offGrid.setFont(new java.awt.Font("Phetsarath OT", 0, 24)); // NOI18N
+        offGrid.setForeground(new java.awt.Color(254, 254, 254));
+        offGrid.setText("Sistema Off Grid");
+        offGrid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mistoActionPerformed(evt);
+                offGridActionPerformed(evt);
+            }
+        });
+
+        onGrid.setBackground(new java.awt.Color(1, 127, 66));
+        onGrid.setFont(new java.awt.Font("Phetsarath OT", 0, 24)); // NOI18N
+        onGrid.setForeground(new java.awt.Color(254, 254, 254));
+        onGrid.setText("Sistema On Grid");
+        onGrid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onGridActionPerformed(evt);
             }
         });
 
@@ -83,37 +80,29 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 20, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(paralelo, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(serie, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(misto, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(105, 105, 105))
+                    .addComponent(onGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(offGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(placa, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(serie, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(placa, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(paralelo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(offGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(misto, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(onGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,26 +113,27 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private void mistoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mistoActionPerformed
-        Misto m = new Misto();
-        m.setVisible(true);
-    }//GEN-LAST:event_mistoActionPerformed
 
-    private void serieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serieActionPerformed
-        Serie s = new Serie();
-        s.setVisible(true);
-    }//GEN-LAST:event_serieActionPerformed
+    private void placaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placaActionPerformed
+        EscolhaPlaca ep = new EscolhaPlaca();
+        ep.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_placaActionPerformed
 
-    private void paraleloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paraleloActionPerformed
-        Paralelo p = new Paralelo();
-        p.setVisible(true);
-    }//GEN-LAST:event_paraleloActionPerformed
+    private void offGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_offGridActionPerformed
+        AdicionarEquipamentos ae = new AdicionarEquipamentos();
+        ae.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_offGridActionPerformed
+
+    private void onGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onGridActionPerformed
+     
+    }//GEN-LAST:event_onGridActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,11 +171,10 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton misto;
-    private javax.swing.JButton paralelo;
-    private javax.swing.JButton serie;
+    private javax.swing.JButton offGrid;
+    private javax.swing.JButton onGrid;
+    private javax.swing.JButton placa;
     // End of variables declaration//GEN-END:variables
 }
