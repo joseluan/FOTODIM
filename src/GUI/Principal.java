@@ -122,13 +122,11 @@ public class Principal extends javax.swing.JFrame {
     private void placaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placaActionPerformed
         EscolhaPlaca ep = new EscolhaPlaca();
         ep.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_placaActionPerformed
 
     private void offGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_offGridActionPerformed
         AdicionarEquipamentos ae = new AdicionarEquipamentos();
         ae.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_offGridActionPerformed
 
     private void onGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onGridActionPerformed

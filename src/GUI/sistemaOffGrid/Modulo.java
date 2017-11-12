@@ -5,8 +5,8 @@
  */
 package GUI.sistemaOffGrid;
 
-import static java.awt.image.ImageObserver.WIDTH;
-import javax.swing.JOptionPane;
+import GUI.utils.Mensagem;
+import java.awt.HeadlessException;
 
 /**
  *
@@ -20,17 +20,19 @@ public class Modulo extends javax.swing.JFrame {
     double energiaTotal;
     double potenciaTotal;
     double radiacao;
+    double correnteBB;
 
     public Modulo() {
         initComponents();
     }
 
-    public Modulo(Double energia, Double potencia, Double radiacao) {
+    public Modulo(Double energia, Double potencia, Double radiacao, Double correnteB) {
         initComponents();
         this.setLocationRelativeTo(null);
         energiaTotal = energia;
         potenciaTotal = potencia;
         this.radiacao = radiacao;
+        correnteBB = correnteB;
     }
 
     /**
@@ -45,35 +47,28 @@ public class Modulo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         comprimento = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         largura = new javax.swing.JFormattedTextField();
-        jLabel11 = new javax.swing.JLabel();
-        potenciaMaxima = new javax.swing.JFormattedTextField();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        corrente = new javax.swing.JFormattedTextField();
         add2 = new javax.swing.JButton();
         eficiencia = new javax.swing.JSpinner();
+        jLabel3 = new javax.swing.JLabel();
+        add3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("FOTODIM");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("UnGraphic", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("FOTODIM");
 
-        jLabel1.setFont(new java.awt.Font("UnGraphic", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("UnGraphic", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(195, 15, 11));
-        jLabel1.setText("SISTEMA OFF GRID ");
-
-        jLabel3.setFont(new java.awt.Font("UnGraphic", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(195, 15, 11));
-        jLabel3.setText("____________________________________");
+        jLabel1.setText("SISTEMA OFF GRID - MÓDULO");
 
         comprimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
         comprimento.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 18)); // NOI18N
@@ -89,23 +84,9 @@ public class Modulo extends javax.swing.JFrame {
         largura.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
         largura.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 18)); // NOI18N
 
-        jLabel11.setFont(new java.awt.Font("UnGraphic", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(2, 130, 65));
-        jLabel11.setText("Potência Máxima");
-
-        potenciaMaxima.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
-        potenciaMaxima.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 18)); // NOI18N
-
         jLabel12.setFont(new java.awt.Font("UnGraphic", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(2, 130, 65));
         jLabel12.setText("Eficiência (%)");
-
-        jLabel13.setFont(new java.awt.Font("UnGraphic", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(2, 130, 65));
-        jLabel13.setText("Corrente de curto circuito");
-
-        corrente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
-        corrente.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 18)); // NOI18N
 
         add2.setBackground(new java.awt.Color(1, 127, 66));
         add2.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
@@ -119,54 +100,63 @@ public class Modulo extends javax.swing.JFrame {
 
         eficiencia.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 18)); // NOI18N
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/utils/imagens/logo_BRANCO_FOTODIM.png"))); // NOI18N
+
+        add3.setBackground(new java.awt.Color(1, 127, 66));
+        add3.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
+        add3.setForeground(new java.awt.Color(254, 254, 254));
+        add3.setText("Próximo");
+        add3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comprimento, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(eficiencia, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(78, 78, 78)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comprimento, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(potenciaMaxima, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(74, 74, 74)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(largura)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                                    .addComponent(eficiencia)))
+                                    .addComponent(largura, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(corrente, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(add2)))
-                        .addGap(98, 98, 98))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(111, 111, 111))))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(35, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(38, 38, 38)))
+                                .addGap(30, 30, 30)
+                                .addComponent(add2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(add3)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(39, 39, 39)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -176,37 +166,25 @@ public class Modulo extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(largura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(potenciaMaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(eficiencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(corrente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(add2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(82, 82, 82)
-                    .addComponent(jLabel3)
-                    .addContainerGap(248, Short.MAX_VALUE)))
+                        .addComponent(jLabel12)
+                        .addGap(4, 4, 4)
+                        .addComponent(eficiencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(add2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(add3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,18 +200,37 @@ public class Modulo extends javax.swing.JFrame {
             Double eqpComprimento = Double.parseDouble(comprimento.getValue().toString());
             Double eqpEficiencia = Double.parseDouble(eficiencia.getValue().toString());
 
-            Double area = eqpComprimento * eqpLargura;
-            Double energiaModulo = area * radiacao * (eqpEficiencia / 100);
-            Double numeroModulo = energiaTotal / energiaModulo;
+            if (eqpLargura > 0 && eqpComprimento > 0 && eqpEficiencia > 0) {
 
-            JOptionPane.showMessageDialog(this, "Cada módulo fotovoltaico"
-                    + " será capaz de gerar " + energiaModulo + " Wh \n"
-                    + "Esse projeto deve ultilizar " + numeroModulo + " módulos!",
-                    "RESULTADO MODULO", WIDTH);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Houve um erro, tente novamente!", "Dados do circuito", WIDTH);
+                Double area = eqpComprimento * eqpLargura;
+                Double energiaModulo = area * radiacao * (eqpEficiencia / 100);
+                long numeroModulo = Math.round(energiaTotal / energiaModulo);
+
+                Mensagem m = new Mensagem("Cada módulo fotovoltaico"
+                        + " será capaz de gerar " + energiaModulo + " Wh \n"
+                        + "Esse projeto deve ultilizar " + numeroModulo + " módulos!",
+                        "RESULTADO MODULO");
+                m.setVisible(true);
+            } else {
+                Mensagem m = new Mensagem("Algum valor informado está negativo!", "Dados do circuito");
+                m.setVisible(true);
+            }
+        } catch (HeadlessException | NumberFormatException e) {
+            Mensagem m = new Mensagem("Houve um erro, tente novamente!", "Dados do circuito");
+            m.setVisible(true);
         }
     }//GEN-LAST:event_add2ActionPerformed
+
+    private void add3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add3ActionPerformed
+        try {
+            ControladorInversor ci = new ControladorInversor(correnteBB, potenciaTotal);
+            ci.setVisible(true);
+            this.setVisible(false);
+        } catch (Exception e) {
+            Mensagem m = new Mensagem("Houve um erro, tente novamente!", "Dados do circuito");
+            m.setVisible(true);
+        }
+    }//GEN-LAST:event_add3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,40 +248,31 @@ public class Modulo extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Modulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Modulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Modulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Modulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Modulo().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Modulo().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add2;
+    private javax.swing.JButton add3;
     private javax.swing.JFormattedTextField comprimento;
-    private javax.swing.JFormattedTextField corrente;
     private javax.swing.JSpinner eficiencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JFormattedTextField largura;
-    private javax.swing.JFormattedTextField potenciaMaxima;
     // End of variables declaration//GEN-END:variables
 }
